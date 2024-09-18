@@ -199,7 +199,7 @@ impl Process {
         let msg = "Unable to set process priority";
         let scheduler = fail!(from self, when self.get_scheduler(), "{} due to a failure while acquiring the current process scheduler.", msg);
         let mut param = posix::sched_param::new();
-        param.sched_priority = scheduler.policy_specific_priority(priority);
+        param.__sched_priority = scheduler.policy_specific_priority(priority);
 
         if unsafe { posix::sched_setparam(self.pid.0, &param) } == 0 {
             return Ok(());
@@ -237,7 +237,7 @@ impl Process {
     ) -> Result<Scheduler, ProcessSetSchedulerError> {
         let msg = "Unable to set scheduler of process";
         let mut param = posix::sched_param::new();
-        param.sched_priority = scheduler.policy_specific_priority(0);
+        param.__sched_priority = scheduler.policy_specific_priority(0);
         let former_scheduler =
             unsafe { posix::sched_setscheduler(self.pid.0, scheduler as i32, &param) };
 

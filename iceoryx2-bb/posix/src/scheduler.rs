@@ -85,7 +85,7 @@ impl Scheduler {
     }
 
     pub(crate) fn get_priority_from(&self, parameter: &posix::sched_param) -> u8 {
-        let priority = parameter.sched_priority;
+        let priority = parameter.__sched_priority;
 
         let max_priority = self.max_priority();
         let min_priority = self.min_priority();

@@ -103,6 +103,7 @@ acl_t acl_from_text(const char *) { return 0; }
 #endif
 
 #ifndef _WIN64
+#define SIGPOLL SIGIO
 struct iox2_sigaction {
     size_t iox2_sa_handler;
     sigset_t iox2_sa_mask;

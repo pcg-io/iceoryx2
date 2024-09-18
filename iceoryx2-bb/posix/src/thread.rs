@@ -386,7 +386,7 @@ impl ThreadBuilder {
         }
 
         let mut param = posix::sched_param::new();
-        param.sched_priority = self.scheduler.policy_specific_priority(self.priority);
+        param.__sched_priority = self.scheduler.policy_specific_priority(self.priority);
         let msg = "Failed to set thread priority";
         handle_errno!(ThreadSpawnError, from self,
             errno_source unsafe { posix::pthread_attr_setschedparam(attributes.get_mut(), &param).into() },
